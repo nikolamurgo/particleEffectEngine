@@ -31,7 +31,7 @@ public class Particle {
         double rd = Math.random();
         Color particleColor = Color.rgb(255, 255, 255, transparency); // make the particle white color
         displayParticle.setFill(particleColor); // set color fill of the particle
-        displayParticle.fillOval(posX, posY, 10, 10);  // set the size of the particle being a circle
+        displayParticle.fillOval(posX, posY, 5, 5);  // set the size of the particle being a circle
     }
 
     public void update(double time) {
