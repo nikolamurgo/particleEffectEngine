@@ -34,7 +34,7 @@ public class Main extends Application {
     }
 
     private void initialize() {
-        emitter = new Emitter(400, 580, 3000);  // Adjust emitter position and particle emission rate
+        emitter = new Emitter(400, 580, 300);  // Adjust emitter position and particle emission rate
     }
 
     private void startSimulation() {
