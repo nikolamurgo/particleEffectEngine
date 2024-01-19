@@ -11,21 +11,24 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     private Emitter emitter;
+    private Particle particle;
     private Canvas canvas; // canvas on which i render particles
 
     public static void main(String[] args) {
         launch(args); // start application javafx
     }
+    double canvasX=800;
+    double canvasY=600;
 
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Particle Effect Engine");
 
         StackPane root = new StackPane();
-        canvas = new Canvas(800, 600);
+        canvas = new Canvas(canvasX, canvasY);
         root.getChildren().add(canvas);
 
-        Scene scene = new Scene(root, 800, 600, Color.BLACK);
+        Scene scene = new Scene(root, canvasX, canvasY, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -35,7 +38,7 @@ public class Main extends Application {
 
     // initialize method for emitter
     private void initialize() {
-        emitter = new Emitter(400, 580, 3000);  // Adjust emitter position and particle emission rate
+        emitter = new Emitter(canvasX/2, canvasY-100, 1000);  // Adjust emitter position and particle emission rate
     }
 
     // gc for canvas and set timer for handle method to calculate time to call update and render
@@ -73,7 +76,7 @@ public class Main extends Application {
     }
     private void renderEmitter(GraphicsContext gc) {
         // Draw the emitter as a filled circle with a different color
-        gc.setFill(Color.WHITESMOKE);  // Set the color of the emitter (e.g., blue)
-        gc.fillOval(emitter.getPosX()-5, emitter.getPosY()-5, 20, 20);  // Adjust the size of the emitter
+        gc.setFill(Color.LIGHTGRAY);  // Set the color of the emitter (e.g., blue)
+        gc.fillOval(emitter.getPosX(), emitter.getPosY(), 40, 40);  // Adjust the size of the emitter
     }
 }
