@@ -25,7 +25,7 @@ public class Emitter {
         return posY;
     }
 
-    // generate and add particles to ArrayList based on partivles per second
+    // generate and add particles to ArrayList based on particles per second
     public void emitParticles(double time) {
         for (int i = 0; i < particlesPerSecond * time; i++) {
             Particle particle = createParticle();
@@ -35,11 +35,15 @@ public class Emitter {
 
     // create new particle with random velocity and lifespan
     private Particle createParticle() {
-        double velX = Math.random() * 100 - 50;  // Random velocity for demonstration
-        double velY = Math.random() * 100 + 50;
-        double lifespan = Math.random() * 2 + 3;  // Random lifespan between 3 and 5
+        double velX = Math.random() * 50 - 25;  // Random velocity for demonstration
+        double velY = Math.random() * 50 + 25;
+        double lifespan = (Math.random() + 2) * 2;  // Random lifespan between 1 and 2
 
-        return new Particle(posX, posY, velX, velY, lifespan);
+        // Offset particle position to the top of the emitter
+        double particlePosX = posX + 5 + Math.random() * 10;
+        double particlePosY = posY - 20 + Math.random() * 10;  // Adjust the offset
+
+        return new Particle(particlePosX, particlePosY, velX, velY, lifespan);
     }
 
     // update each particle in list using provided time and remove dead particles
