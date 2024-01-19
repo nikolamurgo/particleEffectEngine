@@ -9,8 +9,8 @@ public class Particle {
     private double lifespan; // Time of a particle to live
     private double age; // Current age of the particle
     private double transparency; // transparency of particle
-    private static final double GRAVITY = 0.0;  // gravity for now is 0, ajdust to -9.8 to have earth gravity for example
-    public static int size = 20;
+    private static final double GRAVITY = 5;  // gravity for now is 0, adjust to -9.8 to have earth gravity for example
+    public static double size = 20;
 
 
     //constructor
@@ -25,9 +25,9 @@ public class Particle {
     // DRAW each particle on the canvas
     public void draw(GraphicsContext displayParticle) {
         // Draw the particle on the canvas
-        transparency = 1.0 - (age / lifespan);
-//        double rd = Math.random(); // for now we dont use it
-        Color particleColor = Color.rgb(245, 245, 245, transparency); // make the particle white color for smoke effect
+        transparency = 1.0 - Math.pow(age / lifespan,0.5);
+
+        Color particleColor = Color.rgb(150, 150,150, transparency); // make the particle white color for smoke effect
         displayParticle.setFill(particleColor); // set color fill of the particle
         displayParticle.fillOval(posX, posY, size, size);  // set the size of the particle being a circle 20 by 20
     }
