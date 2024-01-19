@@ -11,10 +11,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     private Emitter emitter;
-    private Canvas canvas;
+    private Canvas canvas; // canvas on which i render particles
 
     public static void main(String[] args) {
-        launch(args);
+        launch(args); // start application javafx
     }
 
     @Override
@@ -33,30 +33,32 @@ public class Main extends Application {
         startSimulation();
     }
 
+    // initialize method for emitter
     private void initialize() {
         emitter = new Emitter(400, 580, 3000);  // Adjust emitter position and particle emission rate
     }
 
+    // gc for canvas and set timer for handle method to calculate time to call update and render
     private void startSimulation() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         new AnimationTimer() {
-            long lastNanoTime = System.nanoTime();
+            long lastNanoTime = System.nanoTime(); // i have to figure how to change this in something else
 
             @Override
             public void handle(long currentNanoTime) {
-                double deltaTime = (currentNanoTime - lastNanoTime) / 1e9;  // Convert to seconds
+                double timeT = (currentNanoTime - lastNanoTime) / 1e9;  // Convert to seconds
                 lastNanoTime = currentNanoTime;
 
-                update(deltaTime);
+                update(timeT);
                 render(gc);
             }
         }.start();
     }
 
-    private void update(double deltaTime) {
-        emitter.emitParticles(deltaTime);
-        emitter.updateParticles(deltaTime);
+    private void update(double timeT) {
+        emitter.emitParticles(timeT);
+        emitter.updateParticles(timeT);
     }
 
     private void render(GraphicsContext gc) {

@@ -5,11 +5,12 @@ import javafx.scene.paint.Color;
 
 public class Particle {
     private double posX, posY; // Position of the particle
-    private double velX, velY; // Velocity, the speed in a given direction.
-    private double lifespan; // Time to live (in seconds)
+    private double velX, velY; // Velocity, the speed in X and Y directions
+    private double lifespan; // Time of a particle to live
     private double age; // Current age of the particle
-    private double transparency;
-    private static final double GRAVITY = 0.0;  // Adjust gravity strength
+    private double transparency; // transparency of particle
+    private static final double GRAVITY = 0.0;  // gravity for now is 0, ajdust to -9.8 to have earth gravity for example
+    public static int size = 20;
 
 
     //constructor
@@ -17,21 +18,21 @@ public class Particle {
         this.posX = posX;
         this.posY = posY;
         this.velX = velX;
-        this.velY = velY;
+        this.velY = -Math.abs(velY); // negative value to make the particle move upwards on Y ax
         this.lifespan = lifespan;
-        this.velY = -Math.abs(velY);
     }
 
-    // DRAW each particle
+    // DRAW each particle on the canvas
     public void draw(GraphicsContext displayParticle) {
         // Draw the particle on the canvas
         transparency = 1.0 - (age / lifespan);
-        double rd = Math.random();
-        Color particleColor = Color.rgb(245, 245, 245, transparency); // make the particle white color
+//        double rd = Math.random(); // for now we dont use it
+        Color particleColor = Color.rgb(245, 245, 245, transparency); // make the particle white color for smoke effect
         displayParticle.setFill(particleColor); // set color fill of the particle
-        displayParticle.fillOval(posX, posY, 20, 20);  // set the size of the particle being a circle
+        displayParticle.fillOval(posX, posY, size, size);  // set the size of the particle being a circle 20 by 20
     }
 
+    // update the particle position based on velocity and update age
     public void update(double time) {
         // Update particle position based on velocity
         posX += velX * time;
@@ -39,10 +40,11 @@ public class Particle {
 
         // Update age of the particle
         age += time;
-        velY += GRAVITY * time;
+        velY += GRAVITY * time; // gravity is affecting the vertical velocity velY
 
     }
 
+    // based on the age and lifespan check if the particle has to be removed
     public boolean isAlive() {
         if(age < lifespan){
             return true;
