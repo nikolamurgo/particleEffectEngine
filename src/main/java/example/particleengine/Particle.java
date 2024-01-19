@@ -12,7 +12,6 @@ public class Particle {
     private static final double GRAVITY = 0.0;  // Adjust gravity strength
 
 
-
     //constructor
     public Particle(double posX, double posY, double velX, double velY, double lifespan) {
         this.posX = posX;
@@ -21,7 +20,6 @@ public class Particle {
         this.velY = velY;
         this.lifespan = lifespan;
         this.velY = -Math.abs(velY);
-
     }
 
     // DRAW each particle
@@ -29,9 +27,9 @@ public class Particle {
         // Draw the particle on the canvas
         transparency = 1.0 - (age / lifespan);
         double rd = Math.random();
-        Color particleColor = Color.rgb(255, 255, 255, transparency); // make the particle white color
+        Color particleColor = Color.rgb(245, 245, 245, transparency); // make the particle white color
         displayParticle.setFill(particleColor); // set color fill of the particle
-        displayParticle.fillOval(posX, posY, 5, 5);  // set the size of the particle being a circle
+        displayParticle.fillOval(posX, posY, 20, 20);  // set the size of the particle being a circle
     }
 
     public void update(double time) {
@@ -53,4 +51,3 @@ public class Particle {
         }
     }
 }
-

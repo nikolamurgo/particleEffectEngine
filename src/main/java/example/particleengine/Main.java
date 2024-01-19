@@ -34,7 +34,7 @@ public class Main extends Application {
     }
 
     private void initialize() {
-        emitter = new Emitter(400, 580, 300);  // Adjust emitter position and particle emission rate
+        emitter = new Emitter(400, 580, 3000);  // Adjust emitter position and particle emission rate
     }
 
     private void startSimulation() {
@@ -71,7 +71,7 @@ public class Main extends Application {
     }
     private void renderEmitter(GraphicsContext gc) {
         // Draw the emitter as a filled circle with a different color
-        gc.setFill(Color.WHITE);  // Set the color of the emitter (e.g., blue)
-        gc.fillOval(emitter.getPosX()-5, emitter.getPosY()-5, 10, 10);  // Adjust the size of the emitter
+        gc.setFill(Color.WHITESMOKE);  // Set the color of the emitter (e.g., blue)
+        gc.fillOval(emitter.getPosX()-5, emitter.getPosY()-5, 20, 20);  // Adjust the size of the emitter
     }
 }
