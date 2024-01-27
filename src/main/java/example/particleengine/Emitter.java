@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Emitter {
     private double posX, posY;  // Emitter position
-    private int particlesPerSecond; // how many particles the emitter should emit per second
+    private int emittedParticles; // how many particles the emitter should emit per second
     private List<Particle> particles; // store particles in arraylist (these are alive active particles)
 
     // constructor
-    public Emitter(double posX, double posY, int particlesPerSecond) {
+    public Emitter(double posX, double posY, int emittedParticles) {
         this.posX = posX;
         this.posY = posY;
-        this.particlesPerSecond = particlesPerSecond;
+        this.emittedParticles = emittedParticles;
         this.particles = new ArrayList<>(); // initialize list of particles
     }
 
@@ -27,7 +27,7 @@ public class Emitter {
 
     // generate and add particles to ArrayList based on particles per second
     public void emitParticles(double time) {
-        for (int i = 0; i < particlesPerSecond * time; i++) {
+        for (int i = 0; i < emittedParticles * time; i++) {
             Particle particle = createParticle();
             particles.add(particle);
         }

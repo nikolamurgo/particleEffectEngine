@@ -8,11 +8,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import java.time.Duration;
 
 public class Main extends Application {
     private Emitter emitter;
-    private Particle particle;
-    private Canvas canvas; // canvas on which i render particles
+    private Canvas canvas; // canvas on which I render particles
 
     public static void main(String[] args) {
         launch(args); // start application javafx
@@ -22,7 +22,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Particle Effect Engine");
+        primaryStage.setTitle("Particle Smoke Effect Engine");
 
         StackPane root = new StackPane();
         canvas = new Canvas(canvasX, canvasY);
@@ -46,15 +46,21 @@ public class Main extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         new AnimationTimer() {
-            long lastNanoTime = System.nanoTime(); // i have to figure how to change this in something else
+            long lastNanoTime = System.nanoTime();
 
             @Override
             public void handle(long currentNanoTime) {
-                double timeT = (currentNanoTime - lastNanoTime) / 1e9;  // Convert to seconds
-                lastNanoTime = currentNanoTime;
+                long nanoDuration = currentNanoTime - lastNanoTime;
 
-                update(timeT);
-                render(gc);
+                if (nanoDuration > 0) {
+                    Duration duration = Duration.ofNanos(nanoDuration);
+                    double timeT = duration.toMillis() / 1000.0;  // Convert to seconds
+
+                    lastNanoTime = currentNanoTime;
+
+                    update(timeT);
+                    render(gc);
+                }
             }
         }.start();
     }
@@ -76,7 +82,7 @@ public class Main extends Application {
     }
     private void renderEmitter(GraphicsContext gc) {
         // Draw the emitter as a filled circle with a different color
-        gc.setFill(Color.LIGHTGRAY);  // Set the color of the emitter (e.g., blue)
+        gc.setFill(Color.LIGHTGRAY);  // Set the color of the emitter
         gc.fillOval(emitter.getPosX(), emitter.getPosY(), 40, 40);  // Adjust the size of the emitter
     }
 }
